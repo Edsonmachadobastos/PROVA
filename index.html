@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prova - Instituto Mix Taquara</title>
+    <!-- Biblioteca para gerar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Área principal da prova (folha de papel) */
+        #prova-container {
+            background-color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        h1 { font-size: 22px; text-align: center; margin-bottom: 5px; color: #333; }
+        h2 { font-size: 16px; text-align: center; margin-top: 0; font-weight: normal; color: #555; }
+        
+        .header-info {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #fafafa;
+            border-radius: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .question-box {
+            margin-bottom: 25px;
+            page-break-inside: avoid; /* Evita quebrar a questão no meio da página no PDF */
+        }
+
+        .question-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #000;
+            line-height: 1.4;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            background-color: #fff;
+            box-sizing: border-box; /* Garante que o padding não estoure a largura */
+        }
+
+        textarea:focus {
+            outline: 2px solid #4CAF50;
+            border-color: transparent;
+        }
+
+        /* Botão Flutuante e Estilizado */
+        .btn-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        button#btn-save {
+            background-color: #d32f2f; /* Cor vermelha para destaque */
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background-color 0.2s;
+            font-weight: bold;
+        }
+
+        button#btn-save:hover {
+            background-color: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        button#btn-save:active {
+            transform: scale(0.95);
+        }
+
+        /* Ocultar o botão quando estiver gerando o PDF */
+        .hide-on-pdf {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botão no topo para facilitar -->
+    <div class="btn-container hide-on-pdf">
+        <button id="btn-save-top" onclick="gerarPDF()" style="background-color: #2e7d32; color: white; padding: 10px 20px; border:none; border-radius:5px; cursor:pointer;">
+            ⬇ Baixar PDF Agora
+        </button>
+    </div>
+
+    <!-- Início da Área que será impressa -->
+    <div id="prova-container">
+        <h1>INSTITUTO MIX TAQUARA</h1>
+        <h2>Prova Teórica / Prática – Anatomia e Fisiologia Comparada</h2>
+        <h2>Curso: Auxiliar / Turma de Veterinária</h2>
+
+        <div class="header-info">
+            <div class="input-group">
+                <label>Data:</label>
+                <input type="text" value="10/02/2026">
+            </div>
+            <div class="input-group">
+                <label>Nome do aluno:</label>
+                <input type="text" placeholder="Digite seu nome completo">
+            </div>
+            <div class="input-group">
+                <label>Turma:</label>
+                <input type="text" placeholder="Digite sua turma">
+            </div>
+        </div>
+
+        <p><strong>Instruções:</strong> Leia atentamente as questões. Responda com clareza e objetividade.</p>
+        <hr>
+
+        <!-- Questões -->
+        <div class="question-box">
+            <span class="question-title">1. Explique o conceito de anatomia e fisiologia e descreva a importância do estudo comparado entre diferentes espécies animais.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">2. Descreva os principais processos evolutivos que influenciaram as diferenças morfológicas entre mamíferos e aves.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">3. Explique a função do sistema locomotor e descreva suas principais estruturas.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">4. Descreva o sistema tegumentar, suas camadas e funções nos animais domésticos.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">5. Explique a organização geral do sistema nervoso e suas funções principais.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">6. Descreva o funcionamento do sistema cardiovascular e sua importância para a homeostase.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">7. Explique o processo respiratório e compare a respiração em mamíferos e aves.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">8. Descreva as etapas do processo digestório desde a ingestão até a absorção dos nutrientes.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">9. Explique a função do sistema urinário e sua importância para o equilíbrio do organismo.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">10. Descreva o sistema reprodutor masculino e feminino nos animais domésticos.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">11. Explique as principais fases da reprodução animal.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">12. Diferencie reprodução sexuada e assexuada, citando exemplos.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">13. Explique a importância da anatomia e fisiologia no manejo clínico veterinário.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">14. Relacione o funcionamento integrado dos sistemas digestório, respiratório e circulatório.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <div class="question-box">
+            <span class="question-title">15. Explique por que o conhecimento anatômico é essencial para procedimentos práticos na área veterinária.</span>
+            <textarea placeholder="Sua resposta..."></textarea>
+        </div>
+
+        <hr>
+        
+        <div class="question-box" style="margin-top: 30px;">
+            <span class="question-title" style="font-size: 1.1em; color: #d32f2f;">Questão Prática (Descritiva):</span>
+            <span class="question-title">Descreva um atendimento veterinário básico, explicando quais sistemas do organismo animal são avaliados inicialmente e por quê.</span>
+            <textarea style="height: 200px;" placeholder="Descreva o atendimento detalhadamente..."></textarea>
+        </div>
+
+    </div>
+    <!-- Fim da Área de Impressão -->
+
+    <div class="btn-container hide-on-pdf">
+        <button id="btn-save" onclick="gerarPDF()">SALVAR PROVA EM PDF</button>
+        <p style="margin-top: 10px; color: #666; font-size: 14px;">(O download iniciará automaticamente após alguns segundos)</p>
+    </div>
+
+    <script>
+        function gerarPDF() {
+            // Seleciona o elemento que contém a prova
+            var element = document.getElementById('prova-container');
+            
+            // Pega o nome do aluno para o nome do arquivo, ou usa "Respondida" se vazio
+            var nomeAluno = document.querySelector('input[placeholder="Digite seu nome completo"]').value;
+            var nomeArquivo = nomeAluno ? 'Prova_Veterinaria_' + nomeAluno + '.pdf' : 'Prova_Veterinaria_Respondida.pdf';
+
+            // Configurações do PDF
+            var opt = {
+                margin:       [10, 10, 10, 10], // Margens: topo, esq, baixo, dir (mm)
+                filename:     nomeArquivo,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 }, // Melhora a qualidade da imagem
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Muda o texto do botão para avisar o usuário
+            var btn = document.getElementById('btn-save');
+            var originalText = btn.innerText;
+            btn.innerText = "GERANDO PDF... AGUARDE";
+            btn.style.backgroundColor = "#999";
+
+            // Gera e baixa o PDF
+            html2pdf().set(opt).from(element).save().then(function(){
+                // Restaura o botão após baixar
+                btn.innerText = originalText;
+                btn.style.backgroundColor = "#d32f2f";
+            });
+        }
+    </script>
+</body>
+</html>
